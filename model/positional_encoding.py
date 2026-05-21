@@ -14,6 +14,7 @@ class Solution:
         PE = np.zeros((seq_len, d_model)) #Initialize PE
         pos =  np.arange(seq_len).reshape(-1, 1)
         i = np.arange(0,d_model,2)
-        PE[:, 0::2] = np.sin(pos / (10000**(i / d_model)))
-        PE[:, 1::2] = np.cos(pos / (10000**(i / d_model)))
+        inner = pos / (10000**(i / d_model))
+        PE[:, 0::2] = np.sin(inner)
+        PE[:, 1::2] = np.cos(inner)
         return np.round(PE,5)
