@@ -12,9 +12,7 @@ class Solution:
         # Assign sine to even columns (PE[:, 0::2]) and cosine to odd columns (PE[:, 1::2]).
         # Round to 5 decimal places.
         PE = np.zeros((seq_len, d_model)) #Initialize PE
-        pos =  np.arange(seq_len).reshape(-1, 1)
-        i = np.arange(0,d_model,2)
-        inner = pos / (10000**(i / d_model))
+        inner = np.arange(seq_len).reshape(-1, 1) / (10000**(np.arange(0,d_model,2) / d_model))
         PE[:, 0::2] = np.sin(inner)
         PE[:, 1::2] = np.cos(inner)
         return np.round(PE,5)
